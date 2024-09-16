@@ -1,0 +1,37 @@
+name: Create Pull Request from feature to main
+
+on:
+  push:
+    branches:
+      - 'develop'
+
+permissions:
+  contents: write
+
+jobs:
+  create-pull-request:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Install GitHub CLI
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y gh
+
+    - name: Check if PR exists
+      id: check_pr
+      run: |
+        pr_list=$(gh pr list --base main --head ${{ github.ref_name }} --state open)
+        echo "PR_LIST=$pr_list" >> $GITHUB_ENV
+      env:
+        GH_TOKEN: ${{ secrets.PAT_TOKEN }}
+
+    - name: Create Pull Request if none exists
+      if: env.PR_LIST == ''
+      run: |
+        gh pr create --base main --head ${{ github.ref_name }} --title "PR automático de ${{ github.ref_name }} para main" --body "Este é um PR automático de ${{ github.ref_name }} para main."
+      env:
+        GH_TOKEN: ${{ secrets.PAT_TOKEN }}
