@@ -6,15 +6,15 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        FILE_NAME: "teamtalk-v5.17-ubuntu22-x86_64"
-        URL: "https://bearware.dk/teamtalk/v5.17/teamtalk-v5.17-ubuntu22-x86_64.tgz"
+        FILE_NAME: "teamtalk-v5.18-ubuntu22-x86_64"
+        URL: "https://bearware.dk/teamtalk/v5.18/teamtalk-v5.18-ubuntu22-x86_64.tgz"
     container_name: ttda
     restart: on-failure
     ports:
       - "10333:10333"
       - "10333:10333/udp"
     volumes:
-      - /root/repo/comTT:/server/data
+      - ./server:/server/data
     networks:
       - teamtalk-net
 
