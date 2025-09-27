@@ -1,7 +1,7 @@
 FROM ubuntu:22.04
 
-ARG FILE_NAME=teamtalk-v5.18-ubuntu22-x86_64
-ARG URL=https://bearware.dk/teamtalk/v5.18/teamtalk-v5.18-ubuntu22-x86_64.tgz
+ARG FILE_NAME=teamtalk-v5.20-ubuntu22-x86_64
+ARG URL=https://bearware.dk/teamtalk/v5.18/teamtalk-v5.20-ubuntu22-x86_64.tgz
 
 # Atualize o gerenciador de pacotes e instale o wget
 RUN apt update && apt install wget -y && \
